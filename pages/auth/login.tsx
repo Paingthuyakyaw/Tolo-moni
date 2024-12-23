@@ -31,7 +31,7 @@ const Login = () => {
 
   return (
     <>
-      <div className=" px-4 py-5 w-[400px] shadow-chatShadow rounded-xl bg-white">
+      <div className=" px-4  py-5 w-[400px] md:shadow-chatShadow rounded-xl md:bg-white">
         <h4 className=" font-monserrat font-bold text-xl text-center">
           <span className=" underline decoration-chatPrimary underline-offset-4">
             Log in
