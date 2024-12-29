@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Input, Radio, RadioGroup } from "@nextui-org/react";
 import { useSignUpMutation } from "@/store/server/auth/auth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   email: z
@@ -28,13 +30,23 @@ const RegisterPage = () => {
       email: "",
       username: "",
       password: "",
-      gender: "male",
     },
   });
 
-  const [signUp, { isLoading }] = useSignUpMutation();
+  const router = useRouter();
+
+  const [signUp, { isLoading, isSuccess }] = useSignUpMutation();
+
+  useEffect(() => {
+    if (isSuccess) router.push("/login");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   const { errors } = formState;
+
+  const handleSignUp = async (value: z.infer<typeof formSchema>) => {
+    await signUp(value); // Sign up process
+  };
 
   return (
     <>
@@ -83,7 +95,7 @@ const RegisterPage = () => {
 
         <div className=" mt-4">
           <form
-            onSubmit={handleSubmit((value) => signUp(value))}
+            onSubmit={handleSubmit((value) => handleSignUp(value))}
             className=" space-y-5"
           >
             <Input
@@ -143,10 +155,13 @@ const RegisterPage = () => {
               defaultValue={"male"}
               orientation="horizontal"
               label={"Gender"}
-              {...register("gender")}
             >
-              <Radio value={"male"}>Male</Radio>
-              <Radio value={"female"}>Female</Radio>
+              <Radio {...register("gender")} value={"male"}>
+                Male
+              </Radio>
+              <Radio {...register("gender")} value={"female"}>
+                Female
+              </Radio>
             </RadioGroup>
 
             <Button

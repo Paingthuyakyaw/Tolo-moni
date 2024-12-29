@@ -16,3 +16,19 @@ export interface userPayload {
   gender: string;
   password: string;
 }
+
+export interface loginProp {
+  token: string;
+  message: string;
+  data: {
+    userId: number;
+    name: string;
+    email: string;
+    created_at: string;
+  };
+}
+
+export interface loginPayload {
+  email: string;
+  password: string;
+}

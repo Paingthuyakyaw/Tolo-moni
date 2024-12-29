@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AuthProp, userPayload } from "./typed";
+import { AuthProp, loginPayload, loginProp, userPayload } from "./typed";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -13,7 +13,14 @@ export const authApi = createApi({
         body: userData,
       }),
     }),
+    login: build.mutation<loginProp, loginPayload>({
+      query: (userData) => ({
+        url: "auth/login",
+        method: "POST",
+        body: userData,
+      }),
+    }),
   }),
 });
 
-export const { useSignUpMutation } = authApi;
+export const { useSignUpMutation, useLoginMutation } = authApi;
