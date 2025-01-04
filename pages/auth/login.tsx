@@ -7,6 +7,8 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Input } from "@nextui-org/react";
+import { useLogin } from "@/store/server/auth/mutation";
+import { useRouter } from "next/navigation";
 // import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
@@ -28,7 +30,9 @@ const Login = () => {
     },
   });
 
-  // const router = useRouter();
+  const router = useRouter();
+
+  const login = useLogin();
 
   const { errors } = formState;
 
@@ -79,7 +83,11 @@ const Login = () => {
 
         <div className=" mt-4">
           <form
-            onSubmit={handleSubmit((value) => console.log(value))}
+            onSubmit={handleSubmit((value) =>
+              login.mutate(value, {
+                onSuccess: () => router.push("/"),
+              })
+            )}
             className=" space-y-5"
           >
             <div className=" ">
@@ -123,6 +131,7 @@ const Login = () => {
             <Button
               type="submit"
               size="lg"
+              isLoading={login.isPending}
               className=" w-full bg-chatPrimary text-white"
             >
               Log in

@@ -7,6 +7,8 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Input, Radio, RadioGroup } from "@nextui-org/react";
+import { useRegisetr } from "@/store/server/auth/mutation";
+import { useRouter } from "next/router";
 // import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
@@ -31,12 +33,16 @@ const RegisterPage = () => {
     },
   });
 
-  // const router = useRouter();
+  const router = useRouter();
+
+  const registerMutate = useRegisetr();
 
   const { errors } = formState;
 
   const handleSignUp = (value: z.infer<typeof formSchema>) => {
-    console.log(value);
+    registerMutate.mutate(value, {
+      onSuccess: () => router.push("/login"),
+    });
   };
 
   return (
@@ -158,6 +164,7 @@ const RegisterPage = () => {
             <Button
               type="submit"
               size="lg"
+              isLoading={registerMutate.isPending}
               className=" w-full bg-chatPrimary text-white"
             >
               Create an account
