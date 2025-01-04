@@ -1,15 +1,17 @@
 "use client";
 import NavBarLayout from "@/components/nav-bar";
-import { store } from "@/store/store";
 import { NextUIProvider } from "@nextui-org/react";
 import React from "react";
-import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const NextProvider = ({ children }: { children: React.ReactNode }) => {
+  const queryClient = new QueryClient();
   return (
     <NextUIProvider>
-      <NavBarLayout />
-      <Provider store={store}>{children}</Provider>
+      <QueryClientProvider client={queryClient}>
+        <NavBarLayout />
+        {children}
+      </QueryClientProvider>
     </NextUIProvider>
   );
 };

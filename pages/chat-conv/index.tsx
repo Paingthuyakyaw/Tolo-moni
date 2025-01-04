@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import UseLocalStorage from "@/hook/use-storage";
-import { ConversationProps } from "@/store/server/conversation/typed";
+import { ConversationProps } from "@/store/server/typed";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

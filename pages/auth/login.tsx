@@ -7,9 +7,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Input } from "@nextui-org/react";
-import { useLoginMutation } from "@/store/server/auth/auth";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z
@@ -30,18 +28,7 @@ const Login = () => {
     },
   });
 
-  const [login, { data, isLoading, isSuccess }] = useLoginMutation();
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (isSuccess) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("userId", data.data.userId.toString());
-      router.push("/");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.token, isSuccess]);
+  // const router = useRouter();
 
   const { errors } = formState;
 
@@ -92,7 +79,7 @@ const Login = () => {
 
         <div className=" mt-4">
           <form
-            onSubmit={handleSubmit((value) => login(value))}
+            onSubmit={handleSubmit((value) => console.log(value))}
             className=" space-y-5"
           >
             <div className=" ">
@@ -135,7 +122,6 @@ const Login = () => {
 
             <Button
               type="submit"
-              isLoading={isLoading}
               size="lg"
               className=" w-full bg-chatPrimary text-white"
             >

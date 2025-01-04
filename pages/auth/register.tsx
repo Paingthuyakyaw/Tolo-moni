@@ -7,9 +7,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Input, Radio, RadioGroup } from "@nextui-org/react";
-import { useSignUpMutation } from "@/store/server/auth/auth";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+// import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z
@@ -33,19 +31,12 @@ const RegisterPage = () => {
     },
   });
 
-  const router = useRouter();
-
-  const [signUp, { isLoading, isSuccess }] = useSignUpMutation();
-
-  useEffect(() => {
-    if (isSuccess) router.push("/login");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess]);
+  // const router = useRouter();
 
   const { errors } = formState;
 
-  const handleSignUp = async (value: z.infer<typeof formSchema>) => {
-    await signUp(value); // Sign up process
+  const handleSignUp = (value: z.infer<typeof formSchema>) => {
+    console.log(value);
   };
 
   return (
@@ -165,7 +156,6 @@ const RegisterPage = () => {
             </RadioGroup>
 
             <Button
-              isLoading={isLoading}
               type="submit"
               size="lg"
               className=" w-full bg-chatPrimary text-white"

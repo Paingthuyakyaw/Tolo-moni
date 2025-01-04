@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 
 const chatSocket = io("http://localhost:3001");
 
@@ -23,12 +23,10 @@ const Message = () => {
     },
   });
 
-  const searchParam = useSearchParams();
+  // const searchParam = useSearchParams();
 
-  const receptionId = searchParam?.get("userId");
-  const conversationId = searchParam?.get("convId");
-
-  console.log(receptionId, conversationId, "params");
+  // const receptionId = searchParam?.get("userId");
+  // const conversationId = searchParam?.get("convId");
 
   return (
     <div className="  relative h-[94vh]">
