@@ -1,7 +1,12 @@
+import Message from "@/pages/message";
 import React from "react";
 
-const Chat = () => {
-  return <div>Message</div>;
+const Page = () => {
+  return (
+    <>
+      <Message />
+    </>
+  );
 };
 
-export default Chat;
+export default Page;

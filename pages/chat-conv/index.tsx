@@ -1,38 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import { setConvId } from "@/store/client/conversation.slice";
+import UseLocalStorage from "@/hook/use-storage";
 import { ConversationProps } from "@/store/server/conversation/typed";
-import { RootState } from "@/store/store";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import io from "socket.io-client";
 const chatSocket = io("http://localhost:3001");
 
 const ChatConv = () => {
-  const userId = localStorage?.getItem("userId");
   const [conv, setConvs] = useState<ConversationProps[]>([]);
   const router = useRouter();
   const param = useParams();
-  const cov = useSelector((state: RootState) => state.con);
-  const dispatch = useDispatch();
-
-  console.log(cov);
+  const { nameOfCookie } = UseLocalStorage("userId");
 
   useEffect(() => {
-    chatSocket.emit("getUserConversations", Number(userId));
+    chatSocket.emit("getUserConversations", Number(nameOfCookie));
 
     chatSocket.on("userConversations", (data) => {
       setConvs(data);
-      // dispatch(setConv(data));
     });
 
     return () => {
       chatSocket.off("userConversations");
     };
-  }, [chatSocket]);
+  }, [chatSocket, nameOfCookie]);
 
   const boy = "https://ui.shadcn.com/avatars/02.png";
   const girl = "https://ui.shadcn.com/avatars/03.png";
@@ -42,8 +34,11 @@ const ChatConv = () => {
       {conv.map((item) => (
         <div
           onClick={() => {
-            router.push(`/chat/${item.id}`);
-            dispatch(setConvId(item.id.toString()));
+            router.push(
+              `/chat?convId=${
+                item.id
+              }&userId=${item.participants[0]?.userId.toString()}`
+            );
           }}
           key={item.id}
         >
