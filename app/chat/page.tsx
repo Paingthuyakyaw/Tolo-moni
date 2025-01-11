@@ -1,11 +1,11 @@
 import Message from "@/pages/message";
-import React from "react";
+import React, { Suspense } from "react";
 
 const Page = () => {
   return (
-    <>
+    <Suspense>
       <Message />
-    </>
+    </Suspense>
   );
 };
 

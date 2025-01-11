@@ -85,7 +85,7 @@ const Login = () => {
           <form
             onSubmit={handleSubmit((value) =>
               login.mutate(value, {
-                onSuccess: () => router.push("/"),
+                onSuccess: () => router.push("/chat"),
               })
             )}
             className=" space-y-5"

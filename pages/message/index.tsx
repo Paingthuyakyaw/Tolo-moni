@@ -33,7 +33,7 @@ const Message = () => {
   const conversationId = searchParam?.get("convId");
 
   return (
-    <div className="  relative h-[94vh]">
+    <div className="  relative">
       <div className="">
         <MessageData
           senderId={Number(senderId)}
@@ -41,7 +41,7 @@ const Message = () => {
         />
       </div>
 
-      <div className=" absolute bottom-0 bg-white pb-[30px] pt-[15px] w-full">
+      <div className="  bottom-0 bg-white pb-[30px] pt-[15px] w-full">
         <div className=" mt-4 items-center px-5 gap-3 flex ">
           <IconPaperclip />
           <form

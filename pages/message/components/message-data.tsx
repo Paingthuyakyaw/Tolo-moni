@@ -1,5 +1,5 @@
 import { chatSocket } from "@/store/server/chat";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export interface messageProps {
   id: number;
@@ -19,6 +19,15 @@ const MessageData = ({
   senderId: number;
 }) => {
   const [message, setMessage] = useState<messageProps[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [message]);
 
   useEffect(() => {
     chatSocket.emit("getMessagesInConversation", conversationId);
@@ -41,10 +50,8 @@ const MessageData = ({
     };
   }, [conversationId]);
 
-  console.log(message);
-
   return (
-    <div>
+    <div className=" h-[85vh] overflow-y-scroll">
       <div className=" pt-5 px-10  w-full">
         {message.map((mes) => (
           <div
@@ -65,6 +72,7 @@ const MessageData = ({
             </span>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
     </div>
   );

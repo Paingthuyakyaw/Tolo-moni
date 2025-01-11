@@ -1,10 +1,12 @@
 "use client";
 import UseLocalStorage from "@/hook/use-storage";
+// import { useGetAllUsers } from "@/store/server/user/queries";
 import {
   Button,
   Drawer,
   DrawerBody,
   DrawerContent,
+  Input,
   useDisclosure,
 } from "@nextui-org/react";
 import { IconMenu2 } from "@tabler/icons-react";
@@ -16,6 +18,10 @@ const NavBarLayout = () => {
 
   const { nameOfCookie } = UseLocalStorage("token");
 
+  // const { data } = useGetAllUsers("example@gmail.com");
+
+  // console.log(data);
+
   return (
     <header className=" z-10 bg-white py-3  flex items-center justify-between container min-w-full">
       <div>
@@ -23,7 +29,9 @@ const NavBarLayout = () => {
       </div>
       <nav className=" hidden md:block">
         {nameOfCookie ? (
-          <></>
+          <>
+            <Input className=" w-[300px]" placeholder="Search Account" />
+          </>
         ) : (
           <>
             <ul className=" flex items-center gap-5">
