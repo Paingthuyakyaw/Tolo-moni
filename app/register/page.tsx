@@ -1,5 +1,4 @@
-"use client";
-import RegisterPage from "@/pages/auth/register";
+import RegisterPage from "@/page/auth/register";
 import { Suspense } from "react";
 
 const Register = () => {

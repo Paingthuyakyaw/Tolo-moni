@@ -1,4 +1,4 @@
-import Message from "@/pages/message";
+import Message from "@/page/message";
 import React, { Suspense } from "react";
 
 const Page = () => {

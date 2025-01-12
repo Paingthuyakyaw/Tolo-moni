@@ -1,5 +1,5 @@
 import NavBarLayout from "@/components/nav-bar";
-import ChatConv from "@/pages/chat-conv";
+import ChatConv from "@/page/chat-conv";
 import React, { ReactNode } from "react";
 
 const ChatLayout = ({ children }: { children: ReactNode }) => {

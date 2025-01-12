@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
-import NextProvider from "@/provider/next-provider";
+import Provider from "@/provider/provider";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -36,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${roboto_mono.variable} bg-gray-100 min-h-screen`}
       >
-        <NextProvider>{children}</NextProvider>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );

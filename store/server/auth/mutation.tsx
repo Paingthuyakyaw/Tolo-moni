@@ -1,3 +1,4 @@
+"use client";
 import { axios } from "@/store";
 import { AuthProp, loginPayload, loginProp, userPayload } from "./typed";
 import { useMutation } from "@tanstack/react-query";
